@@ -51,4 +51,4 @@ set GOOS=darwin&&set GOARCH=amd64&&go build -o release/img-base64-darwin-amd64
 
 
 ## 📄 许可证
-[MIT](LICENSE) © Huang Rui
+[MIT](License) © Huang Rui
