@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test GetImage File</title>
+
+  <style>
+    .input-container {
+      width: 500px;
+      display: flex;
+    }
+
+    .input-container input {
+      flex: 1;
+      height: 30px;
+      line-height: 30px;
+      padding: 0 10px;
+      font-size: 16px;
+    }
+
+    .input-container button {
+      margin-left: 1px;
+      padding: 0 16px;
+      background-color: #409eff;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    .img-container {
+      margin-top: 12px;
+      height: 500px;
+      width: 500px;
+      overflow: hidden;
+    }
+
+    .img-container img {
+      max-width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="input-container">
+    <input id="filePath" type="text" placeholder="请输入文件路径" />
+    <button id="uploadBtn">获取图片内容</button>
+  </div>
+  <div class="img-container"></div>
+  <script>
+    const uploadBtn = document.getElementById('uploadBtn');
+    const filePathInput = document.getElementById('filePath');
+    const imgContainer = document.querySelector('.img-container');
+
+    uploadBtn.addEventListener('click', async () => {
+      const filePath = filePathInput.value.trim();
+      if (!filePath) {
+        alert('请输入文件路径');
+        return;
+      }
+
+      try {
+        const response = await fetch(`/getImageFile?file=${encodeURIComponent(filePath)}`);
+        if (!response.ok) {
+          throw new Error('网络响应失败');
+        }
+        const data = await response.text();
+        imgContainer.innerHTML = `<img src="${data}" alt="Image" />`;
+
+      } catch (error) {
+        alert(`请求失败: ${error.message}`);
+      }
+    });
+  </script>
+</body>
+
+</html>
