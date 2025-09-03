@@ -30,8 +30,9 @@ chmod +x img-base64-darwin-amd64
 
 ### 源码编译
 ```bash
-# 克隆或进入项目目录
-cd /xx/img-base64
+# 克隆并进入项目目录
+git clone git@github.com:hr837/local-img-base64.git
+cd local-img-base64
 
 # 安装依赖
 go mod tidy
